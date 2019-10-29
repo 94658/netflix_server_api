@@ -156,7 +156,7 @@ Body
 ```json
 {
    "name": "Joker",
-   "yearReleased": "2020",
+   "yearOfRelease": "2020",
    "categories": [
          {
            "categoryName": "comedy"
@@ -174,7 +174,7 @@ Response
     "id": 13,
     "name": "Joker",
     "type": "suggested",
-    "yearOfRelease": null,
+    "yearOfRelease": "2020",
     "contentowner": {
         "id": 7,
         "identificationNumber": "5233",
