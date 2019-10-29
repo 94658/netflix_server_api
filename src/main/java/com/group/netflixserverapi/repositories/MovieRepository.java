@@ -12,9 +12,9 @@ import java.util.Optional;
 
 public interface MovieRepository extends JpaRepository <Movie,Long> {
 
-    List<Movie> findByOwnerId(Long owner_id);
-    Optional<Movie> findByOwnerIdAndId(Long owner_id, Long id);
-    List <Movie> findAllCategoryAndType(Category category, Movie.MovieType type);
+    List<Movie> findByContentownerId(Long owner_id);
+    Optional<Movie> findByContentownerAndId(Long owner_id, Long id);
+    List <Movie> findByCategoriesAndAndType(Category category, Movie.MovieType type);
 
     void deleteById(Long id); //delete by id of the movie
 

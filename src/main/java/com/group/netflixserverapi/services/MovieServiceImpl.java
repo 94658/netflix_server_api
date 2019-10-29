@@ -37,7 +37,7 @@ public class MovieServiceImpl implements MovieService {
     // to list all movies under a certain owner
     @Override
     public List<Movie> findAllByOwner(Long owner) {
-        return movieRepository.findByOwnerId(owner);
+        return movieRepository.findByContentownerId(owner);
     }
 //
 //    @Override
@@ -50,7 +50,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<Movie> findByCategoryAndType(Long categoryId, Movie.MovieType type) throws Exception {
         Category foundCategory = categoryRepository.findById(categoryId).orElseThrow(() -> new NotFoundException("The given category does not exist"));
-        List<Movie> movies = movieRepository.findAllCategoryAndType(foundCategory, type);
+        List<Movie> movies = movieRepository.findByCategoriesAndAndType(foundCategory, type);
         if(type == Movie.MovieType.suggested || type == Movie.MovieType.original)
             return movies;
         else
@@ -71,7 +71,7 @@ public class MovieServiceImpl implements MovieService {
     public Movie update(Long movieId, String identificationNumber, MovieTemplate movie) throws NotFoundException {
         Subscriber subscriber = subscriberRepository.findByIdentificationNumber(identificationNumber)
                 .orElseThrow(() -> new NotFoundException("User with given identification number does not exist"));
-        Movie updatedmovie = movieRepository.findByOwnerIdAndId(subscriber.getId(), movieId)
+        Movie updatedmovie = movieRepository.findByContentownerAndId(subscriber.getId(), movieId)
                 .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to the subscriber."+ identificationNumber));
         Set<Category> categories = new HashSet<>(categoryRepository.saveAll(movie.getCategories()));
         updatedmovie.setName(movie.getName());
@@ -85,7 +85,7 @@ public class MovieServiceImpl implements MovieService {
     public void delete(String identificationNumber, Long movieId) throws NotFoundException {
         Subscriber foundSubscriber =  subscriberRepository.findByIdentificationNumber(identificationNumber)
                 .orElseThrow(() -> new NotFoundException("User with given identification number does not exist"));
-        Movie deletedMovie =  movieRepository.findByOwnerIdAndId(foundSubscriber.getId(), movieId)
+        Movie deletedMovie =  movieRepository.findByContentownerAndId(foundSubscriber.getId(), movieId)
                  .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to the subscriber."+ identificationNumber));
         movieRepository.deleteByOwnerIdAndId(foundSubscriber.getId(),movieId);
     }
