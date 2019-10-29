@@ -27,9 +27,16 @@ public class MovieServiceImpl implements MovieService {
         this.categoryRepository = categoryRepository;
     }
 
-    // to list all movies
+
+    //to list all movies
     @Override
-    public List<Movie> findAll(Long owner) {
+    public List<Movie> findAll() {
+        return movieRepository.findAll();
+    }
+
+    // to list all movies under a certain owner
+    @Override
+    public List<Movie> findAllByOwner(Long owner) {
         return movieRepository.findByOwnerId(owner);
     }
 //

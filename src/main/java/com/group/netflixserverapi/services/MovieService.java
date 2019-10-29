@@ -7,7 +7,8 @@ import javassist.NotFoundException;
 import java.util.List;
 
 public interface MovieService {
-    List<Movie> findAll(Long owner);
+    List<Movie> findAll();
+    List<Movie> findAllByOwner(Long owner);
 //    List<Movie> findByCategory(String categoryname) throws NotFoundException;
     List<Movie> findByCategoryAndType(Long categoryId, Movie.MovieType type) throws Exception;
     Movie create(String identificationNumber, MovieTemplate movie) throws NotFoundException;

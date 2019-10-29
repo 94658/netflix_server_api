@@ -17,6 +17,11 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    @GetMapping
+    public List<Movie> findAll(){
+        return movieService.findAll();
+    }
+
     /**
      * search for a list of movies by category and type
      * @param categoryId
