@@ -192,6 +192,18 @@ Response
     ]
 }
 ```
+###  Update movie for subscribers' own content
+URL: /movies/{movieId}
+
+METHOD: PATCH
+
+Request Header: "identificationNumber"
+
+Body
+```json
+
+```
+
 
 
 

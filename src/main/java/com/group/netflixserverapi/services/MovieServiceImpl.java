@@ -70,7 +70,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie update(Long movieId, String identificationNumber, MovieTemplate movie) throws NotFoundException {
         Subscriber subscriber = subscriberRepository.findByIdentificationNumber(identificationNumber)
-                .orElseThrow(() -> new NotFoundException("User with given identification number does not exist"));
+                .orElseThrow(() -> new NotFoundException("User with given identification number:"+ identificationNumber+ "does not exist"));
         Movie updatedmovie = movieRepository.findByContentownerAndId(subscriber.getId(), movieId)
                 .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to the subscriber."+ identificationNumber));
         Set<Category> categories = new HashSet<>(categoryRepository.saveAll(movie.getCategories()));
