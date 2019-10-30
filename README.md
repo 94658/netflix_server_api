@@ -106,11 +106,11 @@ METHOD: GET
 
 Request Parameter: type= <suggested/original>
 
-```json
-{
- "type": "original"
-}
+```text
+  http://localhost:9000/movies/2?type=original
 ```
+
+[View a sample image on postman](../com/group/netflixserverapi/images/Capture.PNG)
 
 Response
 ```json
