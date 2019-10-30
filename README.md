@@ -110,7 +110,7 @@ Request Parameter: type= <suggested/original>
   http://localhost:9000/movies/2?type=original
 ```
 
-[View a sample image on postman](../src/main/java/com/group/netflixserverapi/images/Capture.PNG)
+Check here: https://github.com/94658/netflix_server_api/blob/master/src/main/java/com/group/netflixserverapi/images/Capture.PNG
 
 Response
 ```json
