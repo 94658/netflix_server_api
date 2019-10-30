@@ -66,7 +66,7 @@ public class MovieController {
      * @throws NotFoundException
      */
     @DeleteMapping(value = "{movieId}")
-    public void delete(@RequestHeader String identificationNumber, @PathVariable Long movieId) throws NotFoundException {
+    public void delete(  @RequestHeader("identificationNumber") String identificationNumber, @PathVariable Long movieId) throws NotFoundException {
         movieService.delete(identificationNumber, movieId);
     }
 }

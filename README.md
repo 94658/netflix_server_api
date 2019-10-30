@@ -10,7 +10,7 @@ Body
 
 ```json
 {
-    "name": "Jane Doe",
+    "fullname": "Jane Doe",
     "identificationNumber": "54321"
 }
 ```

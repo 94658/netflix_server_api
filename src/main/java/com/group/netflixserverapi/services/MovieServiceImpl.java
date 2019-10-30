@@ -84,9 +84,9 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void delete(String identificationNumber, Long movieId) throws NotFoundException {
         Subscriber foundSubscriber =  subscriberRepository.findByIdentificationNumber(identificationNumber)
-                .orElseThrow(() -> new NotFoundException("User with given identification number does not exist"));
+                .orElseThrow(() -> new NotFoundException("User with given identification number "+ identificationNumber+" does not exist"));
         Movie deletedMovie =  movieRepository.findByContentownerAndId(foundSubscriber.getId(), movieId)
-                 .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to the subscriber."+ identificationNumber));
+                 .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to the subscriber:"+ identificationNumber));
         movieRepository.deleteByOwnerIdAndId(foundSubscriber.getId(),movieId);
     }
 }
