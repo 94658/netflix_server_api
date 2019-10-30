@@ -47,7 +47,7 @@ public class TestData implements CommandLineRunner {
         categories3.add(fourth_category);
 
         Movie movie1 = new Movie("Lego", "2018", Movie.MovieType.original, categories1);
-        Movie movie2 = new Movie("Avengers Endgame", "201", Movie.MovieType.original, categories3);
+        Movie movie2 = new Movie("Avengers Endgame", "2019", Movie.MovieType.original, categories3);
 
         movieRepository.save(movie1);
         movieRepository.save(movie2);

@@ -30,7 +30,8 @@ public class MovieServiceImpl implements MovieService {
 
     //to list all movies
     @Override
-    public List<Movie> findAll() {
+    public List<Movie> findAll()
+    {
         return movieRepository.findAll();
     }
 
@@ -39,12 +40,6 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> findAllByOwner(Long owner) {
         return movieRepository.findByContentownerId(owner);
     }
-//
-//    @Override
-//    public List<Movie> findByCategory(String categoryname) throws NotFoundException {
-//        Category foundCategory = categoryRepository.findById()
-//        return null;
-//    }
 
     //to search for movies by category and type
     @Override
@@ -69,16 +64,16 @@ public class MovieServiceImpl implements MovieService {
     // a movie suggested by a specific subscriber can be updated
     @Override
     public Movie update(Long movieId, String identificationNumber, MovieTemplate movie) throws NotFoundException {
+
         Subscriber subscriber = subscriberRepository.findByIdentificationNumber(identificationNumber)
                 .orElseThrow(() -> new NotFoundException("User with given identification number:"+ identificationNumber+ "does not exist"));
-        Movie updatedmovie = movieRepository.findByContentownerAndId(subscriber.getId(), movieId)
+        Movie updatedMovie = movieRepository.findByContentownerIdAndId(subscriber.getId(), movieId)
                 .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to the subscriber."+ identificationNumber));
         Set<Category> categories = new HashSet<>(categoryRepository.saveAll(movie.getCategories()));
-        updatedmovie.setName(movie.getName());
-        updatedmovie.setYearOfRelease(movie.getYearOfRelease());
-        updatedmovie.setCategories(categories);
-        updatedmovie.setContentowner(subscriber);
-        return movieRepository.save(updatedmovie);
+        updatedMovie.setName(movie.getName());
+        updatedMovie.setYearOfRelease(movie.getYearOfRelease());
+        updatedMovie.setCategories(categories);
+        return movieRepository.save(updatedMovie);
     }
 
     //a movie suggested by a  specific subscriber can be deleted
@@ -86,7 +81,7 @@ public class MovieServiceImpl implements MovieService {
     public void delete(String identificationNumber, Long movieId) throws NotFoundException {
         Subscriber foundSubscriber =  subscriberRepository.findByIdentificationNumber(identificationNumber)
                 .orElseThrow(() -> new NotFoundException("User with given identification number "+ identificationNumber+" does not exist"));
-        Movie deletedMovie =  movieRepository.findByContentownerAndId(foundSubscriber.getId(), movieId)
+        Movie deletedMovie =  movieRepository.findByContentownerIdAndId(foundSubscriber.getId(), movieId)
                  .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to the subscriber:"+ identificationNumber));
         movieRepository.deleteByOwnerIdAndId(foundSubscriber.getId(),movieId);
     }

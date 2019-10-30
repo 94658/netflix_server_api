@@ -50,7 +50,13 @@ public class Movie {
         this.yearOfRelease = yearOfRelease;
     }
 
-    public Movie(String name, String yearOfRelease,  MovieType type,Set<Category> categories) {
+    public Movie(String name, String yearOfRelease, Set<Category> categories) {
+        this.name = name;
+        this.yearOfRelease = yearOfRelease;
+        this.categories = categories;
+    }
+
+    public Movie(String name, String yearOfRelease, MovieType type, Set<Category> categories) {
         this.name = name;
         this.type = type;
         this.yearOfRelease = yearOfRelease;
