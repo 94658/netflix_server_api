@@ -47,8 +47,6 @@ public class Movie {
         this.categories = categories;
     }
 
-
-
     public Movie(String name, MovieType type, String yearOfRelease, Subscriber contentOwner, Set<Category> categories) {
         this.name = name;
         this.type = type;
