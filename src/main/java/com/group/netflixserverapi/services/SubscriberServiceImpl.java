@@ -20,7 +20,7 @@ public class SubscriberServiceImpl implements SubscriberService {
         Optional<Subscriber> newSubscriber = subscriberRepository.findByIdentificationNumber(subscriber.getIdentificationNumber());
 
         if (newSubscriber.isPresent())
-            throw new Exception("This subscriber exists");
+            throw new Exception("This subscriber already exists");
         else if (subscriber.getIdentificationNumber() == null) {
             throw new Exception("identificationNumber cannot be null");
         }

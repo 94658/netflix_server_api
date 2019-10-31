@@ -54,7 +54,7 @@ public class MovieServiceImpl implements MovieService {
     // Subscriber suggests a movie
     @Override
     public Movie create(String identificationNumber, MovieTemplate movie) throws NotFoundException {
-        Subscriber foundSubscriber = subscriberRepository.findByIdentificationNumber(identificationNumber).orElseThrow(() -> new NotFoundException("User with given identification number does not exist"));
+        Subscriber foundSubscriber = subscriberRepository.findByIdentificationNumber(identificationNumber).orElseThrow(() -> new NotFoundException("This user does not exist"));
         List<Category> savedCategories = categoryRepository.saveAll(movie.getCategories());
         Set<Category> categories = new HashSet<>(savedCategories);
         return movieRepository.save(new Movie(movie.getName(), Movie.MovieType.suggested, movie.getYearOfRelease(), foundSubscriber, categories));
@@ -65,9 +65,9 @@ public class MovieServiceImpl implements MovieService {
     public Movie update(Long movieId, String identificationNumber, MovieTemplate movie) throws NotFoundException {
 
         Subscriber subscriber = subscriberRepository.findByIdentificationNumber(identificationNumber)
-                .orElseThrow(() -> new NotFoundException("User with given identification number:" + identificationNumber + "does not exist"));
+                .orElseThrow(() -> new NotFoundException("This subscriber does not exist"));
         Movie updatedMovie = movieRepository.findByContentOwnerIdAndId(subscriber.getId(), movieId)
-                .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to the subscriber." + identificationNumber));
+                .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to this subscriber"));
         Set<Category> categories = new HashSet<>(categoryRepository.saveAll(movie.getCategories()));
         updatedMovie.setName(movie.getName());
         updatedMovie.setYearOfRelease(movie.getYearOfRelease());
@@ -79,9 +79,9 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void delete(String identificationNumber, Long movieId) throws NotFoundException {
         Subscriber foundSubscriber = subscriberRepository.findByIdentificationNumber(identificationNumber)
-                .orElseThrow(() -> new NotFoundException("User with given identification number " + identificationNumber + " does not exist"));
+                .orElseThrow(() -> new NotFoundException("This user does not exist"));
         Movie deletedMovie = movieRepository.findByContentOwnerIdAndId(foundSubscriber.getId(), movieId)
-                .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to the subscriber:" + identificationNumber));
-        movieRepository.deleteByOwnerIdAndId(foundSubscriber.getId(), movieId);
+                .orElseThrow(() -> new NotFoundException("The movie does not exist or does not belong to this subscriber"));
+        movieRepository.deleteMovieByContentOwner_idAndId(foundSubscriber.getId(), movieId);
     }
 }

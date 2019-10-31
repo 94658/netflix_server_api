@@ -65,4 +65,16 @@ public class SubscriberController {
     public Movie update(@PathVariable("identificationNumber") String identificationNumber, @PathVariable Long movieId, @RequestBody MovieTemplate movie) throws NotFoundException {
         return movieService.update(movieId, identificationNumber, movie);
     }
+
+    /**
+     * Deletes Movie belonging to a subscriber,
+     *
+     * @param identificationNumber
+     * @param movieId
+     * @throws NotFoundException
+     */
+    @DeleteMapping(value = "{identificationNumber}/movies/{movieId}")
+    public void delete(@PathVariable("identificationNumber") String identificationNumber, @PathVariable Long movieId) throws NotFoundException {
+        movieService.delete(identificationNumber, movieId);
+    }
 }

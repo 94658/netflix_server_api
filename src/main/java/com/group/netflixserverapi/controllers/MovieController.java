@@ -20,16 +20,4 @@ public class MovieController {
     public List<Movie> findAll() {
         return movieService.findAll();
     }
-
-    /**
-     * Deletes Movie belonging to a subscriber,
-     *
-     * @param identificationNumber
-     * @param movieId
-     * @throws NotFoundException
-     */
-    @DeleteMapping(value = "{movieId}")
-    public void delete(@RequestHeader("identificationNumber") String identificationNumber, @PathVariable Long movieId) throws NotFoundException {
-        movieService.delete(identificationNumber, movieId);
-    }
 }
