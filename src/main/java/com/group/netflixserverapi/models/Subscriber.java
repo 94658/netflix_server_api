@@ -13,37 +13,48 @@ public class Subscriber {
     @Column(name = "identification_number", unique = true)
     private String identificationNumber;
 
-    @Column(name = "fullname")
-    private String fullname;
+    @Column(name = "full_name")
+    private String fullName;
 
-    public Subscriber(){}
+    public Subscriber() {
+    }
 
-    public Subscriber(String identificationNumber, String fullname) {
+    public Subscriber(String identificationNumber, String fullName) {
         this.identificationNumber = identificationNumber;
-        this.fullname = fullname;
+        this.fullName = fullName;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getIdentificationNumber() {
         return identificationNumber;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setIdentificationNumber(String identificationNumber) {
         this.identificationNumber = identificationNumber;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    @Override
+    public String toString() {
+        return "Subscriber{" +
+                "id=" + id +
+                ", identificationNumber='" + identificationNumber + '\'' +
+                ", fullname='" + fullName + '\'' +
+                '}';
     }
 }
