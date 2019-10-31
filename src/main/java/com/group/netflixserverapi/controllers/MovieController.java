@@ -1,7 +1,6 @@
 package com.group.netflixserverapi.controllers;
 
 import com.group.netflixserverapi.models.Movie;
-import com.group.netflixserverapi.models.MovieTemplate;
 import com.group.netflixserverapi.services.MovieService;
 import javassist.NotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -33,33 +32,6 @@ public class MovieController {
     @GetMapping(value = "{categoryId}")
     public List<Movie> findByCategoryAndType(@PathVariable Long categoryId, @RequestParam Movie.MovieType type) throws Exception {
         return movieService.findByCategoryAndType(categoryId, type);
-    }
-
-    /**
-     * Create a suggested Movie by a subscriber
-     *
-     * @param identificationNumber
-     * @param movie
-     * @return a Movie object
-     * @throws NotFoundException
-     */
-    @PostMapping
-    public Movie create(@RequestHeader("identificationNumber") String identificationNumber, @RequestBody MovieTemplate movie) throws NotFoundException {
-        return movieService.create(identificationNumber, movie);
-    }
-
-    /**
-     * Update Movie details belonging to a subscriber, only the owner subscriber can update
-     *
-     * @param movieId
-     * @param identificationNumber
-     * @param movie
-     * @return Movie object
-     * @throws NotFoundException
-     */
-    @PatchMapping(value = "{movieId}")
-    public Movie update(@PathVariable Long movieId, @RequestHeader("identificationNumber") String identificationNumber, @RequestBody MovieTemplate movie) throws NotFoundException {
-        return movieService.update(movieId, identificationNumber, movie);
     }
 
     /**

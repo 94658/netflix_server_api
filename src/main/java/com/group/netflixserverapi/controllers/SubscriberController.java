@@ -1,9 +1,11 @@
 package com.group.netflixserverapi.controllers;
 
 import com.group.netflixserverapi.models.Movie;
+import com.group.netflixserverapi.models.MovieTemplate;
 import com.group.netflixserverapi.models.Subscriber;
 import com.group.netflixserverapi.services.MovieService;
 import com.group.netflixserverapi.services.SubscriberService;
+import javassist.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,5 +37,32 @@ public class SubscriberController {
     @GetMapping(value = "{subscriberId}/movies")
     public List<Movie> userMovies(@PathVariable Long subscriberId) {
         return movieService.findAllByOwner(subscriberId);
+    }
+
+    /**
+     * Create a suggested Movie by a subscriber
+     *
+     * @param identificationNumber
+     * @param movie
+     * @return a Movie object
+     * @throws NotFoundException
+     */
+    @PostMapping(value = "{identificationNumber}/movies")
+    public Movie create(@PathVariable("identificationNumber") String identificationNumber, @RequestBody MovieTemplate movie) throws NotFoundException {
+        return movieService.create(identificationNumber, movie);
+    }
+
+    /**
+     * Update Movie details belonging to a subscriber, only the owner subscriber can update
+     *
+     * @param identificationNumber
+     * @param movieId
+     * @param movie
+     * @return Movie object
+     * @throws NotFoundException
+     */
+    @PatchMapping(value = "{identificationNumber}/movies/{movieId}")
+    public Movie update(@PathVariable("identificationNumber") String identificationNumber, @PathVariable Long movieId, @RequestBody MovieTemplate movie) throws NotFoundException {
+        return movieService.update(movieId, identificationNumber, movie);
     }
 }
