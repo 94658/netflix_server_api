@@ -15,7 +15,6 @@ import java.util.Set;
 public class TestData implements CommandLineRunner {
 
     private final MovieRepository movieRepository;
-//    private final SubscriberRepository subscriberRepository;
     private  final CategoryRepository categoryRepository;
 
     public TestData(MovieRepository movieRepository, CategoryRepository categoryRepository) {
