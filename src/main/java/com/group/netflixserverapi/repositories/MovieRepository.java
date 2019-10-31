@@ -14,15 +14,15 @@ import java.util.Optional;
 @Repository
 public interface MovieRepository extends JpaRepository <Movie,Long> {
 
-    List<Movie> findByContentownerId(Long owner_id);
-    Optional<Movie> findByContentownerIdAndId(Long owner_id, Long id);
-    List <Movie> findByCategoriesAndAndType(Category category, Movie.MovieType type);
+    List<Movie> findByContentOwnerId(Long owner_id);
+    Optional<Movie> findByContentOwnerIdAndId(Long owner_id, Long id);
+    List <Movie> findByCategoriesAndType(Category category, Movie.MovieType type);
 
     void deleteById(Long id); //delete by id of the movie
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM movies WHERE contentowner=?1 AND id=?2", nativeQuery = true)
+    @Query(value = "DELETE FROM movies WHERE contentOwner=?1 AND id=?2", nativeQuery = true)
     void deleteByOwnerIdAndId(Long ownerId, Long id);
 
 
