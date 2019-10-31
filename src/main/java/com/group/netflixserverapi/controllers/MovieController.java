@@ -18,12 +18,13 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<Movie> findAll(){
+    public List<Movie> findAll() {
         return movieService.findAll();
     }
 
     /**
-     * search for a list of movies by category and type
+     * Search for a list of movies by category and type
+     *
      * @param categoryId
      * @param type
      * @return a list of Movies
@@ -35,7 +36,8 @@ public class MovieController {
     }
 
     /**
-     * create a suggested Movie by a subscriber
+     * Create a suggested Movie by a subscriber
+     *
      * @param identificationNumber
      * @param movie
      * @return a Movie object
@@ -43,11 +45,12 @@ public class MovieController {
      */
     @PostMapping
     public Movie create(@RequestHeader("identificationNumber") String identificationNumber, @RequestBody MovieTemplate movie) throws NotFoundException {
-        return  movieService.create(identificationNumber, movie);
+        return movieService.create(identificationNumber, movie);
     }
 
     /**
-     * update Movie details belonging to a subscriber, only the owner subscriber can update
+     * Update Movie details belonging to a subscriber, only the owner subscriber can update
+     *
      * @param movieId
      * @param identificationNumber
      * @param movie
@@ -60,13 +63,14 @@ public class MovieController {
     }
 
     /**
-     * deletes Movie belonging to a subscriber,
+     * Deletes Movie belonging to a subscriber,
+     *
      * @param identificationNumber
      * @param movieId
      * @throws NotFoundException
      */
     @DeleteMapping(value = "{movieId}")
-    public void delete(  @RequestHeader("identificationNumber") String identificationNumber, @PathVariable Long movieId) throws NotFoundException {
+    public void delete(@RequestHeader("identificationNumber") String identificationNumber, @PathVariable Long movieId) throws NotFoundException {
         movieService.delete(identificationNumber, movieId);
     }
 }
