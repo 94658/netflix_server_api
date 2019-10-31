@@ -14,20 +14,20 @@ public class Movie {
     @Column(name = "name")
     private String name;
 
-    public  enum MovieType{
-            original,
-            suggested
+    public enum MovieType {
+        original,
+        suggested
     }
 
     @Enumerated(EnumType.STRING)
     private MovieType type;
 
-    @Column(name = "yearOfRelease")
+    @Column(name = "year_of_release")
     private String yearOfRelease;
 
     @OneToOne
     @JoinColumn(name = "owner_id")
-    private Subscriber contentowner;
+    private Subscriber contentOwner;
 
     @ManyToMany
     @JoinTable(
@@ -37,23 +37,7 @@ public class Movie {
     )
     private Set<Category> categories;
 
-    public Movie(){}
-
-    public Movie(String name, String yearOfRelease) {
-        this.name = name;
-        this.yearOfRelease = yearOfRelease;
-    }
-
-    public Movie(String name, MovieType type, String yearOfRelease) {
-        this.name = name;
-        this.type = type;
-        this.yearOfRelease = yearOfRelease;
-    }
-
-    public Movie(String name, String yearOfRelease, Set<Category> categories) {
-        this.name = name;
-        this.yearOfRelease = yearOfRelease;
-        this.categories = categories;
+    public Movie() {
     }
 
     public Movie(String name, String yearOfRelease, MovieType type, Set<Category> categories) {
@@ -63,25 +47,13 @@ public class Movie {
         this.categories = categories;
     }
 
-    public Movie(String name, String yearOfRelease, Subscriber contentowner, Set<Category> categories) {
-        this.name = name;
-        this.yearOfRelease = yearOfRelease;
-        this.contentowner = contentowner;
-        this.categories = categories;
-    }
 
-    public Movie(String name, MovieType type, Subscriber contentowner, Set<Category> categories) {
-        this.name = name;
-        this.type = type;
-        this.contentowner = contentowner;
-        this.categories = categories;
-    }
 
-    public Movie(String name, MovieType type, String yearOfRelease, Subscriber contentowner, Set<Category> categories) {
+    public Movie(String name, MovieType type, String yearOfRelease, Subscriber contentOwner, Set<Category> categories) {
         this.name = name;
         this.type = type;
         this.yearOfRelease = yearOfRelease;
-        this.contentowner = contentowner;
+        this.contentOwner = contentOwner;
         this.categories = categories;
     }
 
@@ -117,12 +89,12 @@ public class Movie {
         this.yearOfRelease = yearOfRelease;
     }
 
-    public Subscriber getContentowner() {
-        return contentowner;
+    public Subscriber getContentOwner() {
+        return contentOwner;
     }
 
-    public void setContentowner(Subscriber contentowner) {
-        this.contentowner = contentowner;
+    public void setContentOwner(Subscriber contentOwner) {
+        this.contentOwner = contentOwner;
     }
 
     public Set<Category> getCategories() {
