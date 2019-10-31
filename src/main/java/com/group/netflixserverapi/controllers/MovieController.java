@@ -22,19 +22,6 @@ public class MovieController {
     }
 
     /**
-     * Search for a list of movies by category and type
-     *
-     * @param categoryId
-     * @param type
-     * @return a list of Movies
-     * @throws Exception
-     */
-    @GetMapping(value = "{categoryId}")
-    public List<Movie> findByCategoryAndType(@PathVariable Long categoryId, @RequestParam Movie.MovieType type) throws Exception {
-        return movieService.findByCategoryAndType(categoryId, type);
-    }
-
-    /**
      * Deletes Movie belonging to a subscriber,
      *
      * @param identificationNumber
